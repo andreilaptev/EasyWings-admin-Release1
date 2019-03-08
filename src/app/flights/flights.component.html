@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="flights_content" >
+        <div style="text-align: center">
+       
+      <div class="service"> 
+          <h3> FLIGHTS MAINTENANCE PAGE</h3>
+        <div class="newFlightButton">
+         <a routerLink="/create_flight"><button> Create New Flight  </button></a>   
+         <a routerLink="/"><button style="background: lightgreen"> Back to Dashboard </button></a> 
+        
+        </div>
+      
+        <div class="searchField">
+          <h5> Type to search for the flight</h5>
+          <input type="text" name="search" [(ngModel)]="flightSearch">
+        </div> 
+
+      </div>
+
+    </div><br>
+
+    <ul>         
+        <!--<li  *ngFor="let flight of filteredFlights"> -->
+            <li  *ngFor="let flight of flights$ | search:  {departureCity : flightSearch}; index as i">  
+            
+            <div > 
+                <a routerLink="/flight_details/{{flight.id}}">                
+                <h3 class="flight_name">  Flight number : {{ flight.flightName }}</h3>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th> Departure City </th>
+                                <th> Arrival City</th>
+                                <th> Departure Time </th>
+                                <th> Arrival Time </th>
+                                <th> Direct </th>
+                                <th> Price </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{ flight.departureCity }}</td> <!-- | enter: departureCityField : i-->
+                                <td> {{ flight.arrivalCity }}</td>
+                                <td> {{ flight.departureTime }} </td>
+                                <td> {{ flight.arrivalTime }}</td>
+                                <td>
+                                   <div style="color:green" *ngIf="flight.direct;else unset"> Yes</div> 
+                                   <ng-template #unset>No </ng-template>
+                                </td>
+                                <td> {{ flight.ticketPrice }} </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </a>
+             </div>
+        </li>
+        
+    </ul>
+</div>
+
+
+
+
+</div>

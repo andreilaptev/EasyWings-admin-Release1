@@ -1,0 +1,36 @@
+.container {
+    margin-left: 50px;
+}
+
+.container h3 {
+    color: red;
+    
+}
+
+.container input {
+    margin-top: 20px;
+}
+
+.addedWindow {
+position: fixed;
+border: 1px solid black;
+height: 200px;
+width: 300px;
+background: white;
+border-radius: 8px;
+margin: -300px 30%;
+text-align: center;
+}
+
+.addedWindow h3 {
+    color: green;
+    //transform: translateX(28%);
+    padding-top: 15%;
+
+}
+
+button {
+height: 30px;
+width: 150px;
+margin-top: 10px;
+}

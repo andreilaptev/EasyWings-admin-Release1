@@ -1,0 +1,103 @@
+<div class="container">
+
+    <h2> Flight Number: <span>{{ flight$.flightName }} </span></h2>
+
+    <ul>
+      <li> Departure City: <span class="details"> {{ flight$.departureCity }} </span></li>
+      <li> Arrival City: <span class="details">{{ flight$.arrivalCity }}</span></li>
+      <li> Departure Date:  <span class="details">{{ flight$.departureTime | date }}</span></li>
+      <li> Arrival Date: <span class="details">{{ flight$.arrivalTime | date}}</span></li>
+      <li> Direct: <span class="details">{{ flight$.direct }}</span></li>
+      <li> Price: <span class="details"> {{ flight$.ticketPrice | currency}}</span></li>
+    </ul>
+
+</div>
+
+<div class="buttons-container">
+
+  <div class="edit">
+
+    <button (click)=editRequest()> Edit Flight </button>
+    
+  </div>
+
+  <div class="delete">
+    <button (click)=confirmDelete()> Delete Flight </button> 
+  </div> 
+  
+  <div class="back">
+   <a routerLink="/flights"><button> BACK </button></a>  
+  </div>
+
+</div>
+
+<!-- EDITING SECTION-->
+<!--  EDIT FORM-->
+<div class="edit-container" *ngIf="toEdit">
+  <h2> Edit Flight Form</h2>
+
+
+  Flight Number : 
+  <input class="field" type="text" name="flightNumber" placeholder="{{ flight$.flightName }}"  [(ngModel)]="updatedFlight.flightName">
+
+  <br>
+  Departure City :
+  <input class="field" type="text" name="departureCityField" placeholder="{{ flight$.departureCity }}" [(ngModel)]="updatedFlight.departureCity">
+  <br>
+
+  Arrival City :
+  <input class="field" type="text" name="arrivalCityField" placeholder="{{ flight$.arrivalCity }}" [(ngModel)]="updatedFlight.arrivalCity">
+  <br>
+
+  Departure Date :
+  <input class="field" type="date" name="departureDate" placeholder="{{ flight$.departureTime }}" [(ngModel)]="updatedFlight.departureTime">
+  <br>
+
+  Arrival Date :
+  <input class="field" type="date" name="arrivalDate" placeholder="{{ flight$.arrivalTime }}" [(ngModel)]="updatedFlight.arrivalTime">
+  <br>
+
+  Is Direct :
+  <input class="field" type="checkbox" name="isDirect" [(ngModel)]="updatedFlight.isDirect">
+  <br>
+
+  Price :
+  <input class="field" type="number" name="price" placeholder="{{ flight$.ticketPrice }}" [(ngModel)]="updatedFlight.ticketPrice">
+  <br>
+<br>
+
+  <button (click)=confirmEdit()> EDIT </button>
+  <br>
+  
+  <button (click)=editRequest()> CLOSE </button> 
+
+</div>
+
+<!--Edit Confirmation Window-->
+<div class="confirmWindow" *ngIf="editConfirm">
+  <h3> Confirm Flight Update? </h3>
+  <button style="float: left" (click)=editFlight(updatedFlight)> CONFIRM </button> 
+  <button (click)=cancelUpdate()> CANCEL </button>
+</div>
+
+
+<!-- EDIT RESULT WINDOW-->
+<div class="updatedWindow" *ngIf="updated">
+  <h3> Flight Updated !</h3>
+  <a routerLink=""><button> OK </button></a>   
+</div>
+
+<!--DELETE Confirmation Window-->
+<div class="confirmDeleteWindow" *ngIf="deleteConfirm">
+  <h3 style="color: red"> Confirm Flight Delete? </h3>
+  <button style="float: left; background:red; color:white;" (click)=deleteFlight(flightId)> CONFIRM </button> 
+  <button style=" background:white; color:green" (click)=cancelDelete()> CANCEL </button>
+</div>
+
+
+<!-- DELETING SECTION-->
+<!-- DELETE RESULT WINDOW-->
+<div class="deletedWindow" *ngIf="deleted">
+  <h3> Flight Deleted !</h3>
+  <a routerLink="/flights"><button> OK </button></a>   
+</div>
